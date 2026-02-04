@@ -1,0 +1,249 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #eef2f7;
+}
+
+/* LOGIN */
+.login-box {
+    width: 320px;
+    margin: 100px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    text-align: center;
+}
+.login-box .logo-img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 15px;
+}
+.login-box h2 {
+    margin-bottom: 5px;
+    color: #0b4da2;
+}
+.login-box small {
+    color: #777;
+}
+.login-box input {
+    width: 300px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+.login-box button {
+    width: 100%;
+    padding: 12px;
+    background: #0b4da2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.login-box button:hover {
+    background: #083c7c;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(90deg, #0b4da2, #0f6ad8);
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+.logo-container .logo-img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+.logo-text {
+    font-size: 22px;
+    font-weight: bold;
+}
+.logo-text span {
+    display: block;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* AVATAR */
+.user-box {
+    display: flex;
+    align-items: center;
+}
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #0b4da2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 230px;
+    background: #0b4da2;
+    min-height: 100vh;
+}
+.sidebar a {
+    display: block;
+    padding: 14px 20px;
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.sidebar a:hover {
+    background: rgba(255,255,255,0.15);
+}
+.sidebar a.active {
+    background: red;
+}
+
+.content {
+    flex: 1;
+    padding: 25px;
+}
+
+/* CARDS */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+.card h2 {
+    margin-top: 0;
+    color: #0b4da2;
+}
+
+/* ANNOUNCEMENT */
+.announcement {
+    border-left: 5px solid #0b4da2;
+    background: #f8fbff;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+table th {
+    background: #0b4da2;
+    color: white;
+}
+
+/* UTIL */
+.hidden {
+    display: none;
+}
+
+/* SUBJECTS CARDS */
+.subject-card {
+    border-left: 5px solid;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.subject-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.subject-icon {
+    font-size: 28px;
+    margin-right: 10px;
+}
+
+.avatars {
+    display: flex;
+    gap: 8px;
+}
+
+.teacher-avatar, .student-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Teacher and Student Colors */
+.teacher-avatar { background: #0b4da2; }
+.student-avatar { background: #f39c12; }
+
+/* Tooltip */
+.teacher-avatar:hover::after,
+.student-avatar:hover::after {
+    content: attr(title);
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 12px;
+    white-space: nowrap;
+    border-radius: 4px;
+    opacity: 0.9;
+}
+
+.subject-card h3 {
+    margin: 0;
+    color: #0b4da2;
+}
+
+.subject-card p {
+    margin: 3px 0;
+    font-size: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+    .logo-container .logo-img {
+        width: 40px;
+    }
+    .logo-text {
+        font-size: 18px;
+    }
+}
