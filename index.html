@@ -1,208 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ICCT Student Portal</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>ICCT Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginPage">
-    <img src="icct-colleges-rizal-philippines.jpg" class="logo-img">
-    <h2>ICCT COLLEGES</h2>
-    <small>Student Portal Login</small>
-    <input type="text" id="username" placeholder="Username" required>
-    <input type="password" id="password" placeholder="Password" required>
-    <button onclick="login()">Login</button>
-    <p style="font-size:12px;">Demo: <b>student / 1234</b></p>
+<div class="overlay">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="icct-logo.png" alt="ICCT Logo">
+    </div>
+
+    <div class="container">
+
+        <!-- New Student -->
+        <form class="panel new-student" onsubmit="return validateNewStudent()">
+            <h2>New Student<br>Application Portal</h2>
+            <p class="desc">Access with your ACTIVE E-mail Account and Mobile Phone No.</p>
+
+            <label>Username</label>
+            <input type="text" id="ns-username">
+
+            <label>Password</label>
+            <input type="password" id="ns-password">
+
+            <label>Email</label>
+            <input type="email" id="ns-email">
+
+            <label>Mobile Phone No.</label>
+            <input type="text" id="ns-phone">
+
+            <button type="submit" class="btn primary">Sign In</button>
+            <button type="button" class="btn secondary">Create Account</button>
+        </form>
+
+        <!-- Online Student -->
+        <form class="panel online-student" onsubmit="return validateOnlineStudent()">
+            <h2>Online<br>Student Portal</h2>
+            <p class="desc">Access using your Student ID, Email, and Mobile Number.</p>
+
+            <label>Student ID</label>
+            <input type="text" id="os-id">
+
+            <label>Password</label>
+            <input type="password" id="os-password">
+
+            <label>Email</label>
+            <input type="email" id="os-email">
+
+            <label>Mobile Phone No.</label>
+            <input type="text" id="os-phone">
+
+            <button type="submit" class="btn primary">Log In</button>
+            <button type="button" class="btn secondary">Forgot Password</button>
+        </form>
+
+    </div>
 </div>
 
-<!-- PORTAL -->
-<div id="portal" class="hidden">
-<header>
-    <div class="logo-container">
-        <img src="icct-colleges-rizal-philippines.jpg" class="logo-img">
-        <div class="logo-text">
-            ICCT COLLEGES
-            <span>Student Portal</span>
-        </div>
-    </div>
-    <div class="user-box">
-        <div class="avatar">JD</div>
-        <div>Juan Dela Cruz</div>
-    </div>
-</header>
-
-<div class="container">
-<div class="sidebar">
-    <a onclick="showSection('dashboard', this)">Dashboard</a>
-    <a onclick="showSection('profile', this)">Profile</a>
-    <a onclick="showSection('subjects', this)">Subjects</a>
-    <a onclick="showSection('grades', this)">Grades</a>
-    <a onclick="logout(this)">Logout</a>
-</div>
-
-<div class="content">
-
-    <!-- DASHBOARD -->
-    <div id="dashboard" class="card">
-        <h2>Dashboard</h2>
-        <p>Welcome to the ICCT Student Portal.</p>
-
-        <div class="card announcement">
-            <h3>📢 Announcement</h3>
-            <p><b>Midterm Exams:</b> March 10–14, 2026</p>
-            <p><b>Enrollment:</b> Open until March 20, 2026</p>
-            <p>Please settle your balance before finals.</p>
-        </div>
-    </div>
-
-    <!-- PROFILE -->
-    <div id="profile" class="card hidden">
-        <h2>Student Profile</h2>
-        <p><b>Name:</b> Juan Dela Cruz</p>
-        <p><b>Student ID:</b> 2026-001</p>
-        <p><b>Course:</b> BS Information Technology</p>
-        <p><b>Year Level:</b> 1st Year</p>
-        <p><b>Email:</b> juandelacruz@icct.edu.ph</p>
-        <p><b>Phone:</b> +63 912 345 6789</p>
-    </div>
-
-    <!-- SUBJECTS -->
-    <div id="subjects" class="card hidden">
-        <h2>Enrolled Subjects</h2>
-        
-        <div class="subject-card" style="border-left-color:#1abc9c; background:#e8f6f3;">
-            <div class="subject-header">
-                <div class="subject-icon">📚</div>
-                <h3>Philippine Literature</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: maria.santos@icct.edu.ph">MS</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Arvin Alcantara</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-
-        <div class="subject-card" style="border-left-color:#3498db; background:#eaf2fc;">
-            <div class="subject-header">
-                <div class="subject-icon">💻</div>
-                <h3>Data Structure and Algorithm</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: john.reyes@icct.edu.ph">JR</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Mr. Mark Paul Hernandez</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-
-        <div class="subject-card" style="border-left-color:#f39c12; background:#fff8e6;">
-            <div class="subject-header">
-                <div class="subject-icon">🖥️</div>
-                <h3>Human Computer Interaction</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: angela.cruz@icct.edu.ph">AC</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Mr. Jasper Kurt Ebedo</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-
-        <div class="subject-card" style="border-left-color:#9b59b6; background:#f3e8fc;">
-            <div class="subject-header">
-                <div class="subject-icon">🔧</div>
-                <h3>Platform Technologies</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: carlo.mendoza@icct.edu.ph">CM</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Mr. Jasper Kurt Ebedo</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-
-        <div class="subject-card" style="border-left-color:#e74c3c; background:#fde8e8;">
-            <div class="subject-header">
-                <div class="subject-icon">🌐</div>
-                <h3>Web Page Programming</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: liza.ramos@icct.edu.ph">LR</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Ms. Angela Galvez</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-
-        <div class="subject-card" style="border-left-color:#34495e; background:#e8ebf0;">
-            <div class="subject-header">
-                <div class="subject-icon">➗</div>
-                <h3>Discrete Mathematics</h3>
-                <div class="avatars">
-                    <div class="teacher-avatar" title="Email: roberto.tan@icct.edu.ph">RT</div>
-                    <div class="student-avatar" title="Email: juandelacruz@icct.edu.ph | Phone: +63 912 345 6789">JD</div>
-                </div>
-            </div>
-            <p><b>Teacher:</b> Ms. Clariz Ann Serrano</p>
-            <p><b>Student:</b> Juan Dela Cruz</p>
-        </div>
-    </div>
-
-    <!-- GRADES -->
-    <div id="grades" class="card hidden">
-        <h2>Grades</h2>
-        <table>
-            <tr>
-                <th>Subject</th>
-                <th>Prelim</th>
-                <th>Midterm</th>
-                <th>Finals</th>
-                <th>Final Grade</th>
-            </tr>
-
-            <tr>
-                <td>Philippine Literature</td>
-                <td>1.25</td>
-            </tr>
-
-            <tr>
-                <td>Data Structure and Algorithm</td>
-                <td>1.50</td>
-            </tr>
-
-            <tr>
-                <td>Human Computer Interaction</td>
-                <td>1.00</td>
-            </tr>
-
-            <tr>
-                <td>Platform Technologies</td>
-                <td>1.00</td>
-            </tr>
-
-            <tr>
-                <td>Web Page Programming</td>
-                <td>1.25</td>
-            </tr>
-
-            <tr>
-                <td>Discrete Mathematics</td>
-                <td>3.00</td>
-            </tr>
-        </table>
-    </div>
-
-</div>
-</div>
-</div>
-
-<script src="scripts/login-logout.js"></script>
-<script src="scripts/highlight.js"></script>
-<script src="scripts/section.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
