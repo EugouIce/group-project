@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICCT Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="student-dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- PORTAL -->
+<div id="portal">
+<header>
+    <div class="logo-container">
+        <img src="icct-colleges-rizal-philippines.jpg" class="logo-img">
+        <div class="logo-text">
+            ICCT COLLEGES
+            <span>Student Portal</span>
+        </div>
+    </div>
+    <div class="user-box">
+        <div class="avatar" id="userAvatar">JD</div>
+        <div id="userName">Juan Dela Cruz</div>
+    </div>
+</header>
+
+<div class="container">
+<div class="sidebar">
+    <a onclick="showSection('dashboard', this)">Dashboard</a>
+    <a onclick="showSection('profile', this)">Profile</a>
+    <a onclick="showSection('subjects', this)">Subjects</a>
+    <a onclick="showSection('grades', this)">Grades</a>
+    <a onclick="logout()">Logout</a>
+</div>
+
+<div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="card">
+        <h2>Dashboard</h2>
+        <p id="welcomeMessage">Welcome to the ICCT Student Portal.</p>
+
+        <div class="card announcement">
+            <h3>📢 Announcement</h3>
+            <p><b>Midterm Exams:</b> March 10–14, 2026</p>
+            <p><b>Enrollment:</b> Open until March 20, 2026</p>
+            <p>Please settle your balance before finals.</p>
+        </div>
+    </div>
+
+    <!-- PROFILE -->
+    <div id="profile" class="card hidden">
+        <h2>Student Profile</h2>
+        <p><b>Name:</b> <span id="profileName">Juan Dela Cruz</span></p>
+        <p><b>Student ID:</b> <span id="profileStudentId">2026-001</span></p>
+        <p><b>Course:</b> BS Information Technology</p>
+        <p><b>Year Level:</b> 1st Year</p>
+        <p><b>Email:</b> <span id="profileEmail">juandelacruz@icct.edu.ph</span></p>
+        <p><b>Phone:</b> <span id="profilePhone">+63 912 345 6789</span></p>
+    </div>
+
+    <!-- SUBJECTS -->
+    <div id="subjects" class="card hidden">
+        <h2>Enrolled Subjects</h2>
+        
+        <div class="subject-card" style="border-left-color:#1abc9c; background:#e8f6f3;">
+            <div class="subject-header">
+                <div class="subject-icon">📚</div>
+                <h3>Philippine Literature</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: maria.santos@icct.edu.ph">MS</div>
+                    <div class="student-avatar" id="subjectAvatar1" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Arvin Alcantara</p>
+            <p><b>Student:</b> <span id="subjectStudent1">Juan Dela Cruz</span></p>
+        </div>
+
+        <div class="subject-card" style="border-left-color:#3498db; background:#eaf2fc;">
+            <div class="subject-header">
+                <div class="subject-icon">💻</div>
+                <h3>Data Structure and Algorithm</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: john.reyes@icct.edu.ph">JR</div>
+                    <div class="student-avatar" id="subjectAvatar2" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Mr. Mark Paul Hernandez</p>
+            <p><b>Student:</b> <span id="subjectStudent2">Juan Dela Cruz</span></p>
+        </div>
+
+        <div class="subject-card" style="border-left-color:#f39c12; background:#fff8e6;">
+            <div class="subject-header">
+                <div class="subject-icon">🖥️</div>
+                <h3>Human Computer Interaction</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: angela.cruz@icct.edu.ph">AC</div>
+                    <div class="student-avatar" id="subjectAvatar3" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Mr. Jasper Kurt Ebedo</p>
+            <p><b>Student:</b> <span id="subjectStudent3">Juan Dela Cruz</span></p>
+        </div>
+
+        <div class="subject-card" style="border-left-color:#9b59b6; background:#f3e8fc;">
+            <div class="subject-header">
+                <div class="subject-icon">🔧</div>
+                <h3>Platform Technologies</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: carlo.mendoza@icct.edu.ph">CM</div>
+                    <div class="student-avatar" id="subjectAvatar4" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Mr. Jasper Kurt Ebedo</p>
+            <p><b>Student:</b> <span id="subjectStudent4">Juan Dela Cruz</span></p>
+        </div>
+
+        <div class="subject-card" style="border-left-color:#e74c3c; background:#fde8e8;">
+            <div class="subject-header">
+                <div class="subject-icon">🌐</div>
+                <h3>Web Page Programming</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: liza.ramos@icct.edu.ph">LR</div>
+                    <div class="student-avatar" id="subjectAvatar5" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Ms. Angela Galvez</p>
+            <p><b>Student:</b> <span id="subjectStudent5">Juan Dela Cruz</span></p>
+        </div>
+
+        <div class="subject-card" style="border-left-color:#34495e; background:#e8ebf0;">
+            <div class="subject-header">
+                <div class="subject-icon">➗</div>
+                <h3>Discrete Mathematics</h3>
+                <div class="avatars">
+                    <div class="teacher-avatar" title="Email: roberto.tan@icct.edu.ph">RT</div>
+                    <div class="student-avatar" id="subjectAvatar6" title="">JD</div>
+                </div>
+            </div>
+            <p><b>Teacher:</b> Ms. Clariz Ann Serrano</p>
+            <p><b>Student:</b> <span id="subjectStudent6">Juan Dela Cruz</span></p>
+        </div>
+    </div>
+
+    <!-- GRADES -->
+    <div id="grades" class="card hidden">
+        <h2>Grades</h2>
+        <table>
+            <tr>
+                <th>Subject</th>
+                <th>Prelim</th>
+                <th>Midterm</th>
+                <th>Finals</th>
+                <th>Final Grade</th>
+            </tr>
+
+            <tr>
+                <td>Philippine Literature</td>
+                <td>1.25</td>
+                <td>1.25</td>
+                <td>1.00</td>
+                <td>1.25</td>
+            </tr>
+
+            <tr>
+                <td>Data Structure and Algorithm</td>
+                <td>1.50</td>
+                <td>1.50</td>
+                <td>1.50</td>
+                <td>1.50</td>
+            </tr>
+
+            <tr>
+                <td>Human Computer Interaction</td>
+                <td>1.00</td>
+                <td>1.00</td>
+                <td>1.00</td>
+                <td>1.00</td>
+            </tr>
+
+            <tr>
+                <td>Platform Technologies</td>
+                <td>1.00</td>
+                <td>1.00</td>
+                <td>1.00</td>
+                <td>1.00</td>
+            </tr>
+
+            <tr>
+                <td>Web Page Programming</td>
+                <td>1.25</td>
+                <td>1.25</td>
+                <td>1.25</td>
+                <td>1.25</td>
+            </tr>
+
+            <tr>
+                <td>Discrete Mathematics</td>
+                <td>3.00</td>
+                <td>4.00</td>
+                <td>5.00</td>
+                <td>5.00</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+</div>
+</div>
+
+<!-- Load database connection first -->
+<script src="database.js"></script>
+<script src="auth.js"></script>
+
+<!-- Then load portal scripts -->
+<script>
+// Authentication check
+document.addEventListener('DOMContentLoaded', function() {
+    // Get user from storage
+    function getCurrentUser() {
+        const userStr = localStorage.getItem('icct_user_session') || 
+                       sessionStorage.getItem('user');
+        return userStr ? JSON.parse(userStr) : null;
+    }
+    
+    const user = getCurrentUser();
+    console.log('Student portal - User data:', user);
+    
+    if (!user) {
+        console.log('❌ No user session found');
+        alert('Please login first');
+        window.location.href = 'login.html';
+    } else if (user.role !== 'student') {
+        console.log('❌ Access denied: User is a', user.role);
+        alert('This page is for students only');
+        window.location.href = 'login.html';
+    } else {
+        console.log('✅ Student authenticated:', user.full_name);
+        
+        // Update UI with real user data
+        updateUserInterface(user);
+    }
+    
+    // Initialize section switching
+    initializeSections();
+});
+
+function updateUserInterface(user) {
+    // Get user initials for avatar
+    const initials = user.full_name ? 
+        user.full_name.split(' ').map(n => n[0]).join('').toUpperCase() : 'JD';
+    
+    // Update header
+    document.getElementById('userAvatar').textContent = initials;
+    document.getElementById('userName').textContent = user.full_name || 'Student';
+    
+    // Update welcome message
+    document.getElementById('welcomeMessage').textContent = 
+        `Welcome back, ${user.full_name || 'Student'}!`;
+    
+    // Update profile section
+    document.getElementById('profileName').textContent = user.full_name || 'Juan Dela Cruz';
+    document.getElementById('profileStudentId').textContent = user.student_id || '2026-001';
+    document.getElementById('profileEmail').textContent = user.email || 'juandelacruz@icct.edu.ph';
+    document.getElementById('profilePhone').textContent = user.phone || '+63 912 345 6789';
+    
+    // Update subjects section with user info
+    const subjectAvatars = ['subjectAvatar1', 'subjectAvatar2', 'subjectAvatar3', 
+                           'subjectAvatar4', 'subjectAvatar5', 'subjectAvatar6'];
+    
+    const subjectStudents = ['subjectStudent1', 'subjectStudent2', 'subjectStudent3',
+                            'subjectStudent4', 'subjectStudent5', 'subjectStudent6'];
+    
+    subjectAvatars.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = initials;
+            element.title = `Email: ${user.email} | Phone: ${user.phone || '+63 912 345 6789'}`;
+        }
+    });
+    
+    subjectStudents.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.textContent = user.full_name || 'Juan Dela Cruz';
+        }
+    });
+}
+
+function initializeSections() {
+    // Set first section as active
+    const firstLink = document.querySelector('.sidebar a');
+    if (firstLink) {
+        showSection('dashboard', firstLink);
+    }
+}
+
+function showSection(sectionId, linkElement) {
+    // Hide all sections
+    document.querySelectorAll('.content > .card').forEach(section => {
+        section.classList.add('hidden');
+    });
+    
+    // Show selected section
+    const targetSection = document.getElementById(sectionId);
+    if (targetSection) {
+        targetSection.classList.remove('hidden');
+    }
+    
+    // Update active link
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.classList.remove('active');
+    });
+    
+    if (linkElement) {
+        linkElement.classList.add('active');
+    }
+}
+
+function logout() {
+    // Clear storage
+    localStorage.removeItem('icct_user_session');
+    sessionStorage.removeItem('user');
+    
+    // Redirect to login
+    window.location.href = 'login.html';
+}
+</script>
+
+<!-- Load other scripts -->
+<script src="scripts/highlight.js"></script>
+<script src="scripts/section.js"></script>
+
+</body>
+</html>

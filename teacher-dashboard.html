@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard - ICCT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            background: linear-gradient(to right, #2c3e50, #34495e);
+            color: white;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            height: 60px;
+            width: auto;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo-text span {
+            display: block;
+            font-size: 14px;
+            font-weight: normal;
+            opacity: 0.8;
+        }
+        
+        .user-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        #teacherName {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        #teacherEmail {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 600px;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background: #f8f9fa;
+            border-right: 1px solid #eaeaea;
+            padding: 20px 0;
+        }
+        
+        .sidebar a {
+            display: block;
+            padding: 15px 25px;
+            color: #2c3e50;
+            text-decoration: none;
+            border-left: 4px solid transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .sidebar a:hover {
+            background: #eef2f7;
+            border-left-color: #3498db;
+            color: #3498db;
+        }
+        
+        .sidebar a.active {
+            background: #e3f2fd;
+            border-left-color: #3498db;
+            color: #2980b9;
+            font-weight: 600;
+        }
+        
+        .content {
+            flex: 1;
+            padding: 30px;
+            background: white;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            border: 1px solid #eaeaea;
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .card h3 {
+            color: #3498db;
+            margin: 15px 0 10px 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        th {
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        tr:hover {
+            background: #f5f9ff;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .grid-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .grid-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .grid-card h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .announcement {
+            background: linear-gradient(to right, #e3f2fd, #f3e5f5);
+            border-left: 4px solid #3498db;
+        }
+        
+        .subject-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 4px solid #9b59b6;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .subject-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .subject-icon {
+            font-size: 24px;
+        }
+        
+        .avatars {
+            margin-left: auto;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .teacher-avatar, .student-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: white;
+        }
+        
+        .teacher-avatar {
+            background: #e74c3c;
+        }
+        
+        .student-avatar {
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <header class="header">
+            <div class="logo-container">
+                <div class="logo-text">
+                    ICCT COLLEGES
+                    <span>Teacher Portal</span>
+                </div>
+            </div>
+            <div class="user-box">
+                <div class="avatar" id="teacherAvatar">T</div>
+                <div>
+                    <div id="teacherName">Loading...</div>
+                    <div id="teacherEmail">teacher@icct.edu.ph</div>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="sidebar">
+                <a onclick="showSection('dashboard', this)">Dashboard</a>
+                <a onclick="showSection('classes', this)">My Classes</a>
+                <a onclick="showSection('students', this)">Students</a>
+                <a onclick="showSection('grades', this)">Grade Management</a>
+                <a onclick="showSection('announcements', this)">Announcements</a>
+                <a onclick="logout()">Logout</a>
+            </div>
+
+            <div class="content">
+                <!-- DASHBOARD SECTION -->
+                <div id="dashboard" class="card">
+                    <h2>Teacher Dashboard</h2>
+                    <p id="welcomeMessage">Welcome to the ICCT Teacher Portal.</p>
+
+                    <div class="dashboard-grid">
+                        <div class="grid-card" onclick="showSection('classes', 'My Classes')">
+                            <h3>📚 My Classes</h3>
+                            <p>View and manage your teaching assignments</p>
+                        </div>
+                        <div class="grid-card" onclick="showSection('students', 'Students')">
+                            <h3>👥 Students</h3>
+                            <p>View and manage student information</p>
+                        </div>
+                        <div class="grid-card" onclick="showSection('grades', 'Grade Management')">
+                            <h3>📝 Grade Management</h3>
+                            <p>Submit and manage student grades</p>
+                        </div>
+                        <div class="grid-card" onclick="showSection('announcements', 'Announcements')">
+                            <h3>📢 Announcements</h3>
+                            <p>Post announcements to your students</p>
+                        </div>
+                    </div>
+
+                    <div class="card announcement" style="margin-top: 30px;">
+                        <h3>📢 Important Announcements</h3>
+                        <p><b>Midterm Exam Schedule:</b> March 10–14, 2026</p>
+                        <p><b>Grade Submission Deadline:</b> March 25, 2026</p>
+                        <p><b>Faculty Meeting:</b> Every Monday, 3:00 PM</p>
+                        <p>Please submit your grades on time to avoid penalties.</p>
+                    </div>
+                </div>
+
+                <!-- CLASSES SECTION -->
+                <div id="classes" class="card hidden">
+                    <h2>My Classes</h2>
+                    <p>Spring Semester 2026</p>
+
+                    <div class="subject-card">
+                        <div class="subject-header">
+                            <div class="subject-icon">📚</div>
+                            <h3>Philippine Literature</h3>
+                            <div class="avatars">
+                                <div class="teacher-avatar" title="You are teaching this subject">T</div>
+                                <div class="student-avatar" title="35 students">35</div>
+                            </div>
+                        </div>
+                        <p><b>Schedule:</b> Mon & Wed, 9:00 AM - 10:30 AM</p>
+                        <p><b>Room:</b> Room 304</p>
+                        <p><b>Students Enrolled:</b> 35</p>
+                    </div>
+
+                    <div class="subject-card">
+                        <div class="subject-header">
+                            <div class="subject-icon">💻</div>
+                            <h3>Data Structure and Algorithm</h3>
+                            <div class="avatars">
+                                <div class="teacher-avatar" title="You are teaching this subject">T</div>
+                                <div class="student-avatar" title="28 students">28</div>
+                            </div>
+                        </div>
+                        <p><b>Schedule:</b> Tue & Thu, 1:00 PM - 2:30 PM</p>
+                        <p><b>Room:</b> Computer Lab 2</p>
+                        <p><b>Students Enrolled:</b> 28</p>
+                    </div>
+
+                    <div class="subject-card">
+                        <div class="subject-header">
+                            <div class="subject-icon">🌐</div>
+                            <h3>Web Page Programming</h3>
+                            <div class="avatars">
+                                <div class="teacher-avatar" title="You are teaching this subject">T</div>
+                                <div class="student-avatar" title="42 students">42</div>
+                            </div>
+                        </div>
+                        <p><b>Schedule:</b> Mon & Wed, 2:00 PM - 3:30 PM</p>
+                        <p><b>Room:</b> Computer Lab 1</p>
+                        <p><b>Students Enrolled:</b> 42</p>
+                    </div>
+                </div>
+
+                <!-- STUDENTS SECTION -->
+                <div id="students" class="card hidden">
+                    <h2>My Students</h2>
+                    <p>Student list for all your classes</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Class</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>juan.delacruz@icct.edu.ph</td>
+                                <td>Philippine Literature</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr>
+                                <td>2023-002</td>
+                                <td>Maria Santos</td>
+                                <td>maria.santos@icct.edu.ph</td>
+                                <td>Data Structures</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr>
+                                <td>2023-003</td>
+                                <td>John Smith</td>
+                                <td>john.smith@icct.edu.ph</td>
+                                <td>Web Programming</td>
+                                <td>Active</td>
+                            </tr>
+                            <tr>
+                                <td>2023-004</td>
+                                <td>Anna Reyes</td>
+                                <td>anna.reyes@icct.edu.ph</td>
+                                <td>Philippine Literature</td>
+                                <td>Active</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- GRADES SECTION -->
+                <div id="grades" class="card hidden">
+                    <h2>Grade Management</h2>
+                    <p>Submit and manage student grades</p>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Student ID</th>
+                                <th>Name</th>
+                                <th>Subject</th>
+                                <th>Prelim</th>
+                                <th>Midterm</th>
+                                <th>Finals</th>
+                                <th>Final Grade</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>2023-001</td>
+                                <td>Juan Dela Cruz</td>
+                                <td>Philippine Literature</td>
+                                <td><input type="text" value="1.25" style="width: 50px;"></td>
+                                <td><input type="text" value="1.25" style="width: 50px;"></td>
+                                <td><input type="text" value="1.00" style="width: 50px;"></td>
+                                <td>1.25</td>
+                                <td><button class="btn" style="padding: 5px 10px; font-size: 12px;">Update</button></td>
+                            </tr>
+                            <tr>
+                                <td>2023-002</td>
+                                <td>Maria Santos</td>
+                                <td>Data Structures</td>
+                                <td><input type="text" value="1.50" style="width: 50px;"></td>
+                                <td><input type="text" value="1.50" style="width: 50px;"></td>
+                                <td><input type="text" value="1.50" style="width: 50px;"></td>
+                                <td>1.50</td>
+                                <td><button class="btn" style="padding: 5px 10px; font-size: 12px;">Update</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- ANNOUNCEMENTS SECTION -->
+                <div id="announcements" class="card hidden">
+                    <h2>Post Announcements</h2>
+                    <p>Send announcements to your students</p>
+
+                    <div style="margin: 20px 0;">
+                        <textarea placeholder="Type your announcement here..." style="width: 100%; height: 150px; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px;"></textarea>
+                    </div>
+                    
+                    <div>
+                        <button class="btn" style="background: #27ae60;">Post Announcement</button>
+                        <button class="btn" style="background: #7f8c8d; margin-left: 10px;">Save Draft</button>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <h3>Recent Announcements</h3>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <p><b>Midterm Exam Guidelines</b> - Posted: Feb 5, 2026</p>
+                            <p>Please review the exam guidelines before next week's exams.</p>
+                        </div>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 10px 0;">
+                            <p><b>Project Submission Deadline</b> - Posted: Jan 30, 2026</p>
+                            <p>Final projects are due on March 15, 2026.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="scripts/database.js"></script>
+    <script src="scripts/auth.js"></script>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('📋 Teacher dashboard loading...');
+        
+        // Wait a moment for Auth to load
+        setTimeout(function() {
+            // Check authentication - teachers only
+            if (!window.Auth) {
+                console.error('❌ Auth module not loaded');
+                alert('Authentication system not loaded. Please refresh the page.');
+                return;
+            }
+            
+            console.log('🔍 Checking authentication...');
+            if (!Auth.requireAuth('teacher')) {
+                console.log('❌ Not a teacher or not logged in');
+                return;
+            }
+            
+            // Get teacher data
+            const teacher = Auth.getCurrentUser();
+            console.log('✅ Teacher authenticated:', teacher);
+            
+            if (teacher) {
+                updateTeacherUI(teacher);
+                showSection('dashboard', document.querySelector('.sidebar a'));
+            }
+        }, 500); // Give time for scripts to load
+    });
+    
+    function updateTeacherUI(teacher) {
+        // Get initials for avatar
+        const initials = teacher.full_name ? 
+            teacher.full_name.split(' ').map(n => n[0]).join('').toUpperCase() : 'T';
+        
+        // Update header
+        document.getElementById('teacherAvatar').textContent = initials;
+        document.getElementById('teacherName').textContent = teacher.full_name || 'Teacher';
+        document.getElementById('teacherEmail').textContent = teacher.email || 'teacher@icct.edu.ph';
+        
+        // Update welcome message
+        const welcomeMsg = document.getElementById('welcomeMessage');
+        if (welcomeMsg) {
+            welcomeMsg.textContent = `Welcome back, ${teacher.full_name || 'Teacher'}! You can manage your classes, students, and grades here.`;
+        }
+        
+        // Update page title
+        document.title = `${teacher.full_name} - Teacher Dashboard`;
+    }
+    
+    function showSection(sectionId, linkElement) {
+        // If linkElement is a string (from grid cards), find the actual element
+        if (typeof linkElement === 'string') {
+            const sidebarLinks = document.querySelectorAll('.sidebar a');
+            for (let link of sidebarLinks) {
+                if (link.textContent === linkElement) {
+                    linkElement = link;
+                    break;
+                }
+            }
+        }
+        
+        // Hide all sections
+        document.querySelectorAll('.content > .card').forEach(section => {
+            section.classList.add('hidden');
+        });
+        
+        // Show selected section
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+        }
+        
+        // Update active link
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.classList.remove('active');
+        });
+        
+        if (linkElement && typeof linkElement !== 'string') {
+            linkElement.classList.add('active');
+        }
+    }
+    
+    function logout() {
+        if (window.Auth) {
+            Auth.logout();
+        } else {
+            localStorage.removeItem('icct_user_session');
+            window.location.href = 'login.html';
+        }
+    }
+    </script>
+</body>
+</html>

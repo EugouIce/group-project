@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+  command = "echo 'Building site...'"
+
+[build.environment]
+  SUPABASE_URL = "https://skbfjjqardcgdfaupzog.supabase.co"
+  SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNrYmZqanFhcmRjZ2RmYXVwem9nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0Njc0NTUsImV4cCI6MjA4NjA0MzQ1NX0.80-raIjAfQmoFGpRsfZgwn7QDCW9ByvGATcU8f4cN1g"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
