@@ -1,0 +1,166 @@
+* {
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: url("bg.jpg") no-repeat center center/cover;
+}
+
+.overlay {
+    background: rgba(0,0,0,0.65);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* Logo */
+.logo {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.logo img {
+    width: 120px;
+}
+
+/* Layout */
+.container {
+    display: flex;
+    padding-right: 100px;
+    gap: 30px;
+    justify-content: right;
+    flex-wrap: wrap;
+}
+
+/* Panels */
+.panel {
+    width: 360px;
+    padding: 30px;
+    border-radius: 6px;
+    color: #fff;
+}
+
+.new-student {
+    background-color: #9b5c5c;
+}
+
+.online-student {
+    background-color: #7a8fc6;
+}
+
+.panel h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-weight: normal;
+}
+
+.desc {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+label {
+    font-size: 13px;
+    display: block;
+    margin-top: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 7px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 3px;
+}
+
+/* Buttons */
+.btn {
+    width: 70%;
+    padding: 6px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    border: none;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.primary {
+    background: #cc7c7c;
+}
+
+.secondary {
+    background: #7378b8;
+}
+
+.btn:hover {
+    opacity: 0.85;
+}
+
+/* Lower Box */
+.lower-box {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    width: 400px;
+    padding: 20px;
+    background-color: #0047ab; /* blue */
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: #fff;
+}
+
+.lower-box-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+    flex-shrink: 0;
+}
+
+.lower-box-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.lower-box-buttons .btn {
+    width: 100%;
+    padding: 6px;
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    text-decoration: none;
+    color: #fff;
+    text-align: center;
+}
+
+.lower-box-buttons a.btn:hover {
+    background-color: #0047ab !important;
+}
+
+.lower-box-logo {
+    width: 50%;
+    max-width: 200px;
+    height: auto;
+    margin: 10px auto 0;
+    display: block;
+}
+
+/* 📱 Mobile Responsive */
+@media (max-width: 768px) {
+    .panel {
+        width: 100%;
+        max-width: 400px;
+    }
+}

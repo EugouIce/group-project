@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ICCT Student Portal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="overlay">
+
+    <!-- Logo -->
+    <div class="logo">
+        <img src="icct-logo.png" alt="ICCT Colleges logo featuring white text on dark blue background with red banner containing website www.icct.edu.ph and yellow banner with tagline A Global Pinoy Distinction">
+    </div>
+
+    <div class="container">
+
+        <!-- New Student -->
+        <form class="panel new-student" onsubmit="return validateNewStudent()">
+            <h2>New Student<br>Application Portal</h2>
+            <p class="desc">Access with your ACTIVE E-mail Account and Mobile Phone No.</p>
+
+            <label>Username</label>
+            <input type="text" id="ns-username">
+
+            <label>Password</label>
+            <input type="password" id="ns-password">
+
+            <label>Email</label>
+            <input type="email" id="ns-email">
+
+            <label>Mobile Phone No.</label>
+            <input type="text" id="ns-phone" maxlength="11">
+
+            <button type="submit" class="btn primary">Sign In</button>
+            <button type="button" class="btn secondary">Create Account</button>
+        </form>
+
+        <!-- Online Student -->
+        <form class="panel online-student" onsubmit="return validateOnlineStudent()">
+            <h2>Online<br>Student Portal</h2>
+            <p class="desc">Access using your Student ID, Email, and Mobile Number.</p>
+
+            <label>Student ID</label>
+            <input type="text" id="os-id">
+
+            <label>Password</label>
+            <input type="password" id="os-password">
+
+            <label>Email</label>
+            <input type="email" id="os-email">
+
+            <label>Mobile Phone No.</label>
+            <input type="text" id="os-phone" maxlength="11">
+
+            <button type="submit" class="btn primary">Log In</button>
+            <button type="button" class="btn secondary">Forgot Password</button>
+        </form>
+
+    </div>
+
+    <!-- Lower Left Box with Image and Buttons -->
+    <div class="lower-box">
+        <img src="hands_typing.jpg" alt="meow image" class="lower-box-img">
+        <div class="lower-box-buttons">
+            <a href="https://icct.edu.ph/" target="_blank" rel="noopener noreferrer">
+                <img src="logo.png" alt="logo" class="lower-box-logo">
+            </a>
+                <a href="https://icct.edu.ph/programs/" target="_blank" rel="noopener noreferrer" class="btn primary">PROGRAMS</a>
+            <a href="https://icct.edu.ph/admission-2/" target="_blank" rel="noopener noreferrer" class="btn secondary">ADMISSION</a>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
