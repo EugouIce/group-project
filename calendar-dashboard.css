@@ -1,0 +1,98 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #d9d9d9;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.calendar-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+/* BOX STYLE */
+.calendar-box, .events-box {
+    background: #f2f2f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding-bottom: 10px;
+}
+
+/* HEADERS */
+.box-header {
+    background: #143b8f;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+}
+
+/* CALENDAR HEADER */
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-weight: bold;
+}
+
+.calendar-header button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+/* TABLE */
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.calendar-table th {
+    background: #143b8f;
+    color: white;
+    padding: 8px;
+}
+
+.calendar-table td {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.calendar-table td:hover {
+    background: #c5d4ff;
+}
+
+/* ACTIVE DATE */
+.active {
+    background: #143b8f;
+    color: white;
+    font-weight: bold;
+}
+
+/* EVENTS PANEL */
+.events-box {
+    width: 300px;
+}
+
+.events-content {
+    padding: 15px;
+    font-size: 14px;
+}
