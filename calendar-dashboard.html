@@ -8,21 +8,18 @@
 <body>
 
 <div class="container">
-
     <h1>Calendar</h1>
 
     <div class="calendar-wrapper">
 
-        <!-- LEFT CALENDAR BOX -->
+        <!-- CALENDAR -->
         <div class="calendar-box">
-            <div class="box-header">
-                <span>📅 Calendar</span>
-            </div>
+            <div class="box-header">📅 Calendar</div>
 
             <div class="calendar-header">
-                <button>&laquo;</button>
-                <span>February 2026</span>
-                <button>&raquo;</button>
+                <button onclick="prevMonth()">«</button>
+                <span id="monthYear"></span>
+                <button onclick="nextMonth()">»</button>
             </div>
 
             <table class="calendar-table">
@@ -37,51 +34,21 @@
                         <th>Sa</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="active">8</td>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td>14</td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>16</td>
-                        <td>17</td>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td>22</td>
-                        <td>23</td>
-                        <td>24</td>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td>28</td>
-                    </tr>
-                </tbody>
+                <tbody id="calendarBody"></tbody>
             </table>
         </div>
 
-        <!-- RIGHT EVENTS BOX -->
+        <!-- EVENTS -->
         <div class="events-box">
-            <div class="box-header">
-                <span>📅 Events</span>
-            </div>
+            <div class="box-header">📅 Events</div>
             <div class="events-content">
                 <p>No announcement.</p>
             </div>
         </div>
 
     </div>
-
 </div>
 
+<script src="script.js"></script>
 </body>
 </html>
