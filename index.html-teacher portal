@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICCT PORTAL - Teacher Grading System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background-color: #007bff; color: white; padding: 20px; text-align: center; display: flex; align-items: center; justify-content: center; }
+        header img { width: 80px; height: auto; margin-right: 20px; }
+        .container { display: flex; }
+        nav { width: 200px; background-color: #343a40; color: white; padding: 20px; height: 100vh; }
+        nav ul { list-style: none; padding: 0; }
+        nav li { margin: 10px 0; }
+        nav a { color: white; text-decoration: none; }
+        main { flex: 1; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        button { background-color: #28a745; color: white; border: none; padding: 10px; cursor: pointer; margin: 5px; }
+        button:hover { background-color: #218838; }
+        .announcement-card { background: white; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 15px; }
+        .announcement-card h4 { margin: 0 0 10px 0; color: #007bff; }
+        .announcement-card p { margin: 5px 0; }
+        .announcement-card small { color: #666; }
+        footer { background-color: #343a40; color: white; text-align: center; padding: 10px; position: fixed; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="loginLogo.png" alt="ICCT Logo">
+        <h1><i class="fas fa-graduation-cap"></i> ICCT PORTAL - Grading System</h1>
+    </header>
+    <div class="container">
+        <nav>
+            <ul>
+                <li><a href="#dashboard"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+                <li><a href="#pretest"><i class="fas fa-clipboard-list"></i> Pre-Test</a></li>
+                <li><a href="#posttest"><i class="fas fa-clipboard-check"></i> Post-Test</a></li>
+                <li><a href="#quiz"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                <li><a href="#activity"><i class="fas fa-tasks"></i> Activity</a></li>
+                <li><a href="#exam"><i class="fas fa-file-alt"></i> Exam</a></li>
+                <li><a href="#totalaverages"><i class="fas fa-calculator"></i> Total Averages</a></li>
+                <li><a href="#studentview"><i class="fas fa-eye"></i> Student Grade View</a></li>
+                <li><a href="#reports"><i class="fas fa-chart-bar"></i> Reports</a></li>
+            </ul>
+        </nav>
+        <main id="content">
+            <section id="dashboard">
+                <h2>Announcements</h2>
+                <p>Post announcements about upcoming or released grades for all students.</p>
+                <div id="announcementsList"></div>
+                <button onclick="addAnnouncement()">Add Announcement</button>
+            </section>
+            <section id="pretest" style="display:none;">
+                <h2>Pre-Test Grades</h2>
+                <table id="pretestTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="addGrade('pretest')">Add Grade</button>
+            </section>
+            <section id="posttest" style="display:none;">
+                <h2>Post-Test Grades</h2>
+                <table id="posttestTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="addGrade('posttest')">Add Grade</button>
+            </section>
+            <section id="quiz" style="display:none;">
+                <h2>Quiz Grades</h2>
+                <table id="quizTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="addGrade('quiz')">Add Grade</button>
+            </section>
+            <section id="activity" style="display:none;">
+                <h2>Activity Grades</h2>
+                <table id="activityTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="addGrade('activity')">Add Grade</button>
+            </section>
+            <section id="exam" style="display:none;">
+                <h2>Exam Grades</h2>
+                <table id="examTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Score</th><th>Actions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="addGrade('exam')">Add Grade</button>
+            </section>
+            <section id="totalaverages" style="display:none;">
+                <h2>Total Averages</h2>
+                <p>Overall average per student per subject (numerical and grade equivalent).</p>
+                <table id="totalAveragesTable">
+                    <thead><tr><th>Subject</th><th>Student Number</th><th>Student Name</th><th>Numerical Average</th><th>Grade Equivalent</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+                <button onclick="calculateTotalAverages()">Calculate All Averages</button>
+            </section>
+            <section id="studentview" style="display:none;">
+                <h2>Student Grade View</h2>
+                <p>Preview how grades appear for a student in the Student Portal.</p>
+                <button onclick="previewStudentGrades()">Preview Grades for Student</button>
+                
+                <button onclick="resetStudentGrades()" style="margin-left:10px; background:#e74c3c;">Reset Grades</button>
+               
+                <div id="studentGradesPreview" style="display:none;">
+                    <h3>Grades for Student: <span id="studentIdDisplay"></span></h3>
+                    <table id="studentGradesTable">
+                        <tr>
+                            <th>Subject</th>
+                            <th>Prelim</th>
+                            <th>Midterm</th>
+                            <th>Final</th>
+                            <th>Finals Grade</th>
+                        </tr>
+                        <tr>
+                            <td>Data Structure</td>
+                            <td id="ds-prelim"></td>
+                            <td id="ds-midterm"></td>
+                            <td id="ds-final"></td>
+                            <td id="ds-finals"></td>
+                        </tr>
+                        <tr>
+                            <td>Human Computer Interaction</td>
+                            <td id="hci-prelim"></td>
+                            <td id="hci-midterm"></td>
+                            <td id="hci-final"></td>
+                            <td id="hci-finals"></td>
+                        </tr>
+                        <tr>
+                            <td>Web Development</td>
+                            <td id="wd-prelim"></td>
+                            <td id="wd-midterm"></td>
+                            <td id="wd-final"></td>
+                            <td id="wd-finals"></td>
+                        </tr>
+                        <tr>
+                            <td>Philippine Literature</td>
+                            <td id="pl-prelim"></td>
+                            <td id="pl-midterm"></td>
+                            <td id="pl-final"></td>
+                            <td id="pl-finals"></td>
+                        </tr>
+                        <tr>
+                            <td>Platform Technologies</td>
+                            <td id="pt-prelim"></td>
+                            <td id="pt-midterm"></td>
+                            <td id="pt-final"></td>
+                            <td id="pt-finals"></td>
+                        </tr>
+                        <tr>
+                            <td>Discrete Mathematics</td>
+                            <td id="dm-prelim"></td>
+                            <td id="dm-midterm"></td>
+                            <td id="dm-final"></td>
+                            <td id="dm-finals"></td>
+                        </tr>
+                    </table>
+                </div>
+            </section>
+            <section id="reports" style="display:none;">
+                <h2>Reports</h2>
+                <button onclick="exportCSV()">Export to CSV</button>
+                <button onclick="resetStudentGrades()">Reset Student Grades</button>
+
+            </section>
+        </main>
+    </div>
+    <footer>&copy; 2026 ICCT. All rights reserved.</footer>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('main section').forEach(sec => sec.style.display = 'none');
+                document.getElementById(this.getAttribute('href').substring(1)).style.display = 'block';
+            });
+        });
+
+        // Data storage for grades (now per subject)
+        let grades = JSON.parse(localStorage.getItem('grades')) || {};
+
+        // Announcements storage
+        let announcements = JSON.parse(localStorage.getItem('announcements')) || [];
+
+        // Function to convert numerical score to grade equivalent
+        function getGradeEquivalent(score) {
+            if (score >= 97) return '1.00';
+            if (score >= 94) return '1.25';
+            if (score >= 91) return '1.50';
+            if (score >= 88) return '1.75';
+            if (score >= 85) return '2.00';
+            if (score >= 82) return '2.25';
+            if (score >= 79) return '2.50';
+            if (score >= 76) return '2.75';
+            if (score >= 73) return '3.00';
+            if (score >= 70) return '3.25';
+            if (score >= 67) return '3.50';
+            if (score >= 64) return '3.75';
+            if (score >= 60) return '4.00';
+            return '5.00';
+        }
+
+        function addAnnouncement() {
+            let title = prompt('Announcement Title:');
+            let message = prompt('Announcement Message:');
+            if (title && message) {
+                let date = new Date().toLocaleString();
+                announcements.push({ title, message, date });
+                localStorage.setItem('announcements', JSON.stringify(announcements));
+                renderAnnouncements();
+            }
+        }
+
+        function renderAnnouncements() {
+            let list = document.getElementById('announcementsList');
+            list.innerHTML = '';
+            announcements.forEach((ann, index) => {
+                list.innerHTML += `
+                    <div class="announcement-card">
+                        <h4>${ann.title}</h4>
+                        <p>${ann.message}</p>
+                        <small>Posted on: ${ann.date}</small>
+                        <button onclick="deleteAnnouncement(${index})">Delete</button>
+                    </div>
+                `;
+            });
+        }
+
+        function deleteAnnouncement(index) {
+            announcements.splice(index, 1);
+            localStorage.setItem('announcements', JSON.stringify(announcements));
+            renderAnnouncements();
+        }
+
+        function addGrade(type) {
+            let subject = prompt('Subject (e.g., Data Structure):');
+            let studentNumber = prompt('Student Number:');
+            let name = prompt('Student Name:');
+            let score = prompt('Score:');
+            if (subject && studentNumber && name && score) {
+                if (!grades[subject]) grades[subject] = { pretest: [], posttest: [], quiz: [], activity: [], exam: [] };
+                grades[subject][type].push({ studentNumber, name, score: parseFloat(score) });
+                localStorage.setItem('grades', JSON.stringify(grades));
+                renderTable(type);
+            }
+        }
+
+        function renderTable(type) {
+            let tbody = document.querySelector(`#${type}Table tbody`);
+            tbody.innerHTML = '';
+            Object.keys(grades).forEach(subject => {
+                grades[subject][type].forEach((grade, index) => {
+                    tbody.innerHTML += `<tr><td>${subject}</td><td>${grade.studentNumber}</td><td>${grade.name}</td><td>${grade.score}</td><td><button onclick="deleteGrade('${subject}', '${type}', ${index})">Delete</button></td></tr>`;
+                });
+            });
+        }
+
+        function deleteGrade(subject, type, index) {
+            grades[subject][type].splice(index, 1);
+            localStorage.setItem('grades', JSON.stringify(grades));
+            renderTable(type);
+        }
+
+        function calculateTotalAverages() {
+            let tbody = document.querySelector('#totalAveragesTable tbody');
+            tbody.innerHTML = '';
+            Object.keys(grades).forEach(subject => {
+                let subjectGrades = grades[subject];
+                let studentTotals = {};
+                Object.keys(subjectGrades).forEach(type => {
+                    subjectGrades[type].forEach(grade => {
+                        let key = `${grade.studentNumber}-${grade.name}`;
+                        if (!studentTotals[key]) studentTotals[key] = { studentNumber: grade.studentNumber, name: grade.name, scores: [] };
+                        studentTotals[key].scores.push(grade.score);
+                    });
+                });
+                Object.values(studentTotals).forEach(student => {
+                    let numAvg = student.scores.length ? (student.scores.reduce((sum, s) => sum + s, 0) / student.scores.length).toFixed(2) : 'N/A';
+                    let gradeEq = numAvg !== 'N/A' ? getGradeEquivalent(parseFloat(numAvg)) : 'N/A';
+                    tbody.innerHTML += `<tr><td>${subject}</td><td>${student.studentNumber}</td><td>${student.name}</td><td>${numAvg}</td><td>${gradeEq}</td></tr>`;
+                });
+            });
+        }
+
+        function previewStudentGrades() {
+            let studentId = prompt('Enter Student Number to Preview:');
+            if (!studentId) return;
+            document.getElementById('studentIdDisplay').textContent = studentId;
+            let grades = JSON.parse(localStorage.getItem('grades')) || {};
+            let subjects = {
+                'Data Structure': 'ds',
+                'Human Computer Interaction': 'hci',
+                'Web Development': 'wd',
+                'Philippine Literature': 'pl',
+                'Platform Technologies': 'pt',
+                'Discrete Mathematics': 'dm'
+            };
+
+            Object.keys(subjects).forEach(subject => {
+                let prefix = subjects[subject];
+                let subjectGrades = grades[subject] || {};
+                let studentScores = [];
+
+                let prelimScore = subjectGrades.pretest?.find(g => g.studentNumber === studentId)?.score;
+                let midtermScore = subjectGrades.posttest?.find(g => g.studentNumber === studentId)?.score;
+                let finalScore = subjectGrades.exam?.find(g => g.studentNumber === studentId)?.score;
+
+                document.getElementById(`${prefix}-prelim`).textContent = prelimScore ? getGradeEquivalent(prelimScore) : '';
+                if (prelimScore) studentScores.push(prelimScore);
+
+                document.getElementById(`${prefix}-midterm`).textContent = midtermScore ? getGradeEquivalent(midtermScore) : '';
+                if (midtermScore) studentScores.push(midtermScore);
+
+                document.getElementById(`${prefix}-final`).textContent = finalScore ? getGradeEquivalent(finalScore) : '';
+                if (finalScore) studentScores.push(finalScore);
+
+                let finalsAvg = studentScores.length ? studentScores.reduce((sum, s) => sum + s, 0) / studentScores.length : null;
+                document.getElementById(`${prefix}-finals`).textContent = finalsAvg ? getGradeEquivalent(finalsAvg) : '';
+            });
+            document.getElementById('studentGradesPreview').style.display = 'block';
+        }
+
+        function exportCSV() {
+            let csv = 'Subject,Type,Student Number,Student Name,Score\n';
+            Object.keys(grades).forEach(subject => {
+                Object.keys(grades[subject]).forEach(type => {
+                    grades[subject][type].forEach(g => csv += `${subject},${type},${g.studentNumber},${g.name},${g.score}\n`);
+                });
+            });
+            let blob = new Blob([csv], { type: 'text/csv' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = 'grades.csv';
+            a.click();
+        }
+
+        // Initial render
+        renderAnnouncements();
+    </script>
+</body>
+</html>
