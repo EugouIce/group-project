@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ICCT Portal Prototype</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Segoe UI, Arial;
+    background:#f2f5ff;
+}
+
+/* HEADER */
+header{
+    background:#0b4da2;
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:white;
+    color:#0b4da2;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+/* LAYOUT */
+.container{
+    display:flex;
+}
+
+.sidebar{
+    width:220px;
+    background:#0b4da2;
+    min-height:100vh;
+}
+
+.sidebar a{
+    display:block;
+    padding:15px;
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.sidebar a:hover{
+    background:rgba(255,255,255,0.2);
+}
+
+.content{
+    flex:1;
+    padding:20px;
+}
+
+/* CARD */
+.card{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    margin-bottom:20px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+}
+
+th{
+    background:#0b4da2;
+    color:white;
+}
+
+/* BUTTON */
+button{
+    padding:10px 15px;
+    border:none;
+    background:#0b4da2;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#083b7a;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>ICCT Portal Prototype</h2>
+    <div class="avatar">JD</div>
+</header>
+
+<div class="container">
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a onclick="show('dashboard')">Dashboard</a>
+    <a onclick="show('subjects')">Subjects</a>
+    <a onclick="show('grades')">Grades</a>
+    <a onclick="show('teacher')">Teacher Panel</a>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<!-- DASHBOARD -->
+<div id="dashboard" class="card">
+    <h3>Announcements</h3>
+    <p>Enrollment starts next week.</p>
+</div>
+
+<!-- SUBJECTS -->
+<div id="subjects" class="card hidden">
+    <h3>My Subjects</h3>
+    <ul>
+        <li>Web Development</li>
+        <li>Database Systems</li>
+        <li>Programming 2</li>
+    </ul>
+</div>
+
+<!-- GRADES -->
+<div id="grades" class="card hidden">
+    <h3>My Grades</h3>
+    <table>
+        <tr><th>Subject</th><th>Grade</th></tr>
+        <tr><td>Web Dev</td><td>1.75</td></tr>
+        <tr><td>Database</td><td>2.00</td></tr>
+    </table>
+</div>
+
+<!-- TEACHER PANEL -->
+<div id="teacher" class="card hidden">
+    <h3>Teacher Grading System</h3>
+
+    <button onclick="addRow()">Add Grade</button>
+
+    <table id="gradeTable">
+        <tr>
+            <th>Student</th>
+            <th>Subject</th>
+            <th>Score</th>
+        </tr>
+    </table>
+</div>
+
+</div>
+</div>
+
+<script>
+function show(section){
+    document.querySelectorAll(".card").forEach(el=>el.classList.add("hidden"));
+    document.getElementById(section).classList.remove("hidden");
+}
+
+function addRow(){
+    let name=prompt("Student Name:");
+    let subject=prompt("Subject:");
+    let score=prompt("Score:");
+
+    let table=document.getElementById("gradeTable");
+    let row=table.insertRow();
+    row.innerHTML=`<td>${name}</td><td>${subject}</td><td>${score}</td>`;
+}
+</script>
+
+</body>
+</html>
