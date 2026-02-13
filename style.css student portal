@@ -1,0 +1,157 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-image: url('icct-bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+header {
+    background: rgba(11,77,162,0.9);
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-container img {
+    width: 80px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.user-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    background: white;
+    color: #0b4da2;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 240px;
+    background: rgba(11,77,162,0.95);
+    min-height: 100vh;
+}
+
+.sidebar a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background: rgba(255,255,255,0.2);
+}
+
+.logout {
+    background: #e74c3c;
+}
+
+.logout:hover {
+    background: #c0392b;
+}
+
+.content {
+    flex: 1;
+    padding: 25px;
+}
+
+.card {
+    background: rgba(255,255,255,0.95);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.profile-actions button {
+    padding: 12px 18px;
+    margin: 10px 10px 0 0;
+    border: none;
+    background: #0b4da2;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.profile-actions button:hover {
+    background: #083b7a;
+}
+
+.subject-card {
+    padding: 15px;
+    border-left: 5px solid #0b4da2;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: center;
+}
+
+th {
+    background: #0b4da2;
+    color: white;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar div {
+    background: #eaf0ff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+    }
+}
